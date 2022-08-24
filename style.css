@@ -64,4 +64,11 @@ body {
   
   #word {
     font-size: 36px;
+    margin: 10px;
+  }
+
+  #message, #chances {
+    font-weight: bold;
+    font-size: 20px;
+    height: 20px;
   }
