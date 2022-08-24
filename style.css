@@ -1,0 +1,67 @@
+body {
+  background: rgb(34,193,195);
+  background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 100px;
+}
+.start-button {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 10px;
+  background: rgb(195,132,34);
+  background: linear-gradient(0deg, rgba(195,132,34,1) 0%, rgba(253,166,45,1) 100%);
+}
+
+.start-button:hover {
+  opacity: 0.9;
+}
+
+.start-button:active {
+  transform: translate(1px, 1px);
+  box-shadow: -1px -1px 1px 0 rgb(131, 131, 131);
+}
+
+#play-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.alphabet {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-top: 30px;
+  height: 100%;
+}
+
+
+.single-letter {
+  width: 40px;
+  height: 40px;
+  margin: 3px;
+}
+
+#word {
+  font-size: 36px;
+}
