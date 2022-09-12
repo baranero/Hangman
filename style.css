@@ -1,6 +1,5 @@
 body {
-  background: rgb(34,193,195);
-  background: radial-gradient(circle, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  background: rgb(225, 225, 225);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -10,6 +9,20 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+#play {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px 220px;
+}
+
+#draw {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 h1 {
@@ -24,9 +37,8 @@ h1 {
   padding: 10px 30px;
   border: none;
   border-radius: 10px;
-  background: rgb(195,132,34);
-  background: linear-gradient(0deg, rgba(195,132,34,1) 0%, rgba(253,166,45,1) 100%);
-}
+  background: rgb(173, 173, 173);
+ }
 
 .start-button:hover {
   opacity: 0.9;
@@ -50,7 +62,7 @@ h1 {
   flex-flow: wrap;
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 60%;
   margin-top: 30px;
   height: 100%;
 }
@@ -60,6 +72,9 @@ h1 {
   width: 40px;
   height: 40px;
   margin: 3px;
+  font-weight: bold;
+  background-color: white;
+  border: 1px solid gray;
 }
 
 #word {
@@ -71,4 +86,11 @@ h1 {
   font-weight: bold;
   font-size: 20px;
   height: 20px;
+}
+
+#my-canvas {
+
+  height: 300px;
+  width: 400px;
+  margin-right: 50px;
 }
