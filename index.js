@@ -6,17 +6,13 @@ const letterButtons = document.getElementsByClassName("single-letter");
 const messageEl = document.getElementById("message");
 const chancesEl = document.getElementById("chances");
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let objWords = {
-    animal: ["DOG", "CAT", "ELEPHANT", "TIGER"],
-    cities: ["WARSAW", "LONDON", "NEW YORK"]
-}
-
 let words = ["DOG", "CAT", "ELEPHANT", "TIGER", "WARSAW", "LONDON"];
 let word = words[Math.floor(Math.random() * words.length)];     //draw a word from array
 let wordSpace = [];     //underscore in the number of letters in the word
-let chances = 10;       
-let amountOfCorrectLetters = 0;  //
+let chances = 10;       //number of chances
+let amountOfCorrectLetters = 0;  
 
+/* onClick function which add letters, underscores equal to the number of letters in the word and the field in which Hangman is drawn */
 
 startButton.addEventListener("click", function startGame() {
     addAlphabetToDesktop();
@@ -35,20 +31,20 @@ startButton.addEventListener("click", function startGame() {
     styleSheet = document.createElement("style")
     styleSheet.innerText = styles
     document.head.appendChild(styleSheet)
-}, { once: true,
+}, { once: true, // starGame function only works once
  });
  
- replayButton.addEventListener("click", function (){
+ replayButton.addEventListener("click", function (){ //button allows to start again
     window.location.reload();
  })
 
-function addAlphabetToDesktop() {
+function addAlphabetToDesktop() { //function adds letters to desktop as inputs
     for (let i = 0; i < alphabet.length; i++) {
         alphabetRow.innerHTML += `<input type="button" class="single-letter" value="${alphabet[i]}">`;
     };
 }
 
-function addPlaceForLetter() {
+function addPlaceForLetter() { // function adds underscores equal to the number of letters in word
     for (let i = 0; i < word.length; i++) {
         wordSpace.push(" _");
         wordRow.innerText += wordSpace[i];
@@ -56,20 +52,20 @@ function addPlaceForLetter() {
     console.log(word);
 }
 
-function checkPlaceOfLetterInWord(e) {
+function checkPlaceOfLetterInWord(event) { //function checks index of choosen letter and push it to letterInWord array
     for (let i = 0; i < 1; i++) {
         letterInWord = [];
         startIndex = 0;
-        while ((index = word.indexOf((e.target.value), startIndex)) > -1) {
+        while ((index = word.indexOf((event.target.value), startIndex)) > -1 ) {
             letterInWord.push(index);
-            startIndex = index + e.target.value.length;
+            startIndex = index + event.target.value.length;
         }
     } 
 }
 
-function displayCorrectLetter(e) {
+function displayCorrectLetter(event) { // function adds correct letters to desktop and counts amount of correct hits
     for (let i = 0; i < letterInWord.length; i++) {
-        wordSpace[letterInWord[i]] = e.target.value;
+        wordSpace[letterInWord[i]] = event.target.value;
         amountOfCorrectLetters += 1;
     }
     withoutCommas = wordSpace.join(" ");
@@ -77,37 +73,39 @@ function displayCorrectLetter(e) {
     
 }
 
-function checkWin() {
+function checkWin() { //checks if all letters have been guessed
     if (amountOfCorrectLetters === word.length) {
         return (messageEl.textContent = "You win!")
     } 
 }
 
-let moves = {
+let moves = { //the coordinates of the starting points on the canvas
     x1: [30, 40, 40, 160, 160, 160, 160, 160, 160],
     y1: [130, 130, 30, 30, 64, 76, 76, 100, 100],
     x2: [200, 40, 160, 160, 160, 140, 180, 140, 180],
     y2: [130, 30, 30, 50, 100, 66, 66, 110, 110]
 }
 
-function drawLine(x1, y1, x2, y2) {
+function drawLine(x1, y1, x2, y2) { //draws lines based on moves coordinates
     ctx.beginPath();
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2)
     ctx.stroke();
 }
 
-function drawCircle() {
+function drawCircle() { //draws head of hanged man
     ctx.beginPath();
     ctx.arc(160, 57, 7, 0, 2 * Math.PI);
     ctx.stroke();
 }
 
-function hangman(e) {
-    if (e.target.className == "single-letter") {
-        if (word.includes(e.target.value)) {
-            checkPlaceOfLetterInWord(e);
-            displayCorrectLetter(e);
+/* main function which checks and displays letters and draws every part of hanged man when user chooses wrong letter */
+
+function hangman(event) {
+    if (event.target.className == "single-letter") {
+        if (word.includes(event.target.value)) {
+            checkPlaceOfLetterInWord(event);
+            displayCorrectLetter(event);
             messageEl.textContent = "Great! Keep going.";
             if (amountOfCorrectLetters === word.length) {
                 document.body.removeEventListener('click', hangman)
@@ -124,7 +122,7 @@ function hangman(e) {
             document.body.removeEventListener('click', hangman)
             return (messageEl.textContent = "Game over!")
         } 
-        else if (word.includes(e.target.value) == false) {
+        else if (word.includes(event.target.value) == false) {
             console.log("Wrong letter");
             messageEl.textContent = "Wrong letter! Try again."
             chances -= 1;
@@ -149,15 +147,9 @@ function hangman(e) {
             }
             console.log(chances);
             chancesEl.textContent = `You have ${chances} chances`;
-            
-           // for (let i = 0; i < 1; i ++) {
-                //drawLine(moves.x1[0], moves.y1[0], moves.x2[0], moves.y2[0])
-               // drawLine(moves.x1[1], moves.y1[1], moves.x2[1], moves.y2[1])
-           // }
 
         }
-        console.log(e);
-        e.target.disabled = true;
+        event.target.disabled = true; //letter is disabled after click
     }
 }
 

@@ -9,13 +9,14 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  margin-top: 100px;
 }
 
 #play {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 20px 220px;
+  margin: 20px 20px;
 }
 
 #draw {
@@ -62,7 +63,7 @@ h1 {
   flex-flow: wrap;
   align-items: center;
   justify-content: center;
-  width: 60%;
+  width: 80%;
   margin-top: 30px;
   height: 100%;
 }
